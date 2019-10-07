@@ -245,6 +245,12 @@ Config file location will be resolved in this order:
 
 """
 
+##
+## ENCODING
+##
+
+sys.stdout.reconfigure(encoding='utf-8')
+
 
 ##
 ## Shell command helper functions
@@ -476,7 +482,7 @@ for _label in ("Indent", "Wrap", "ReSub", "noop", "final_dot",
 ##
 
 def file_get_contents(filename):
-    with open(filename) as f:
+    with open(filename, encoding="utf-8") as f:
         out = f.read()
     if not PY3:
         if not isinstance(out, unicode):
@@ -1457,8 +1463,8 @@ def FileInsertAtFirstRegexMatch(filename, pattern, flags=0,
         new_offset = 0
         postfix = False
 
-        with open(filename + "~", "w") as dst:
-            with open(filename, "r") as src:
+        with open(filename + "~", "w", encoding="utf-8") as dst:
+            with open(filename, "r", encoding="utf-8") as src:
                 for line in src:
                     if postfix:
                         dst.write(line)
