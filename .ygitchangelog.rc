@@ -58,6 +58,7 @@
 ## will be ignored and won't be reported in the changelog.
 ##
 ignore_regexps = [
+    r'CHANGELOG',
     r'@minor', r'!minor',
     r'@cosmetic', r'!cosmetic',
     r'@refactor', r'!refactor',
@@ -82,19 +83,17 @@ ignore_regexps = [
 ## whenever you are tweaking this variable.
 ##
 section_regexps = [
-    ('New', [
-        r'^[nN]ew\s*:\s*((dev|use?r|pkg|test|doc)\s*:\s*)?([^\n]*)$',
+    ('🚀 Yenilikler', [
+        r'\bekle|\boluş|(\byeni )|\b[cC]reate|\barttır|\bartır'
+    ]),
+    ('🌌 Değişikler', [
+        r'\b[tT]aşı|\bdeğiş|\b[uU]pdate|\bgüncel|\byenile|\bdönül|\bgeç|\bkoyu|\byapılan|\b[rR]evert|\b[gG]eri|\balındı|\baktar|\byenile|(\bevril)|\bgetir|\b[Aa]rtık',
      ]),
-    ('Changes', [
-        r'^[cC]hg\s*:\s*((dev|use?r|pkg|test|doc)\s*:\s*)?([^\n]*)$',
+    ('🗽 Düzeltmeler', [
+        r'\b[bB]ug|\bdüzen|\bdüzelt|\bgider|\bkalk|\b[kK]aldır|\bayrıl|\b[dD]elete',
      ]),
-    ('Fix', [
-        r'^[fF]ix\s*:\s*((dev|use?r|pkg|test|doc)\s*:\s*)?([^\n]*)$',
-     ]),
-
-    ('Other', None ## Match all lines
+    ('📡 Diğerler', None ## Match all lines
      ),
-
 ]
 
 
@@ -150,19 +149,14 @@ subject_process = (strip |
 ##
 ## Tags that will be used for the changelog must match this regexp.
 ##
-tag_filter_regexp = r'^[0-9]+\.[0-9]+(\.[0-9]+)?$'
+tag_filter_regexp = r'^[0-9]+\.[0-9]+(\.[0-9]+)?$' # Yemreak Olmazsa version version ayırıyor 
 
 
 ## ``unreleased_version_label`` is a string or a callable that outputs a string
 ##
 ## This label will be used as the changelog Title of the last set of changes
 ## between last valid tag and HEAD if any.
-import os.path
-unreleased_version_label = lambda: swrap(
-    (["bash"] if WIN32 else []) +
-    [os.path.join(".", "autogen.sh"), "--get-version"],
-shell=False)
-
+unreleased_version_label = "✨ Güncel" # "(unreleased)"
 
 
 ## ``output_engine`` is a callable
@@ -193,9 +187,9 @@ shell=False)
 ##        Examples:
 ##           - makotemplate("restructuredtext")
 ##
-output_engine = rest_py
+#output_engine = rest_py
 #output_engine = mustache("restructuredtext")
-#output_engine = mustache("markdown")
+output_engine = mustache("markdown")
 #output_engine = makotemplate("restructuredtext")
 
 
@@ -230,7 +224,7 @@ include_merge = True
 ##        Outputs directly to standard output
 ##        (This is the default)
 ##
-##   - FileInsertAtFirstRegexMatch(file, pattern, idx=lamda m: m.start(), flags)
+##   - FileInsertAtFirstRegexMatch(file, pattern, idx=lamda m: m.start())
 ##
 ##        Creates a callable that will parse given file for the given
 ##        regex pattern and will insert the output in the file.
