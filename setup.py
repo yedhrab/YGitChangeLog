@@ -1,7 +1,7 @@
 from distutils.core import setup
 import setuptools
 
-VERSION = "1.0.0"
+VERSION = "1.0.2"
 
 long_description = ""
 with open("README.md", "r", encoding="utf-8") as file:
@@ -27,9 +27,9 @@ setup(
     # download_url=f'https://github.com/yedhrab/YPackage/archive/{VERSION}.tar.gz',
     # Keywords that define your package best
     keywords=['changelog', 'gitchangelog', 'ygitchangelog'],
-    install_requires=[            # I get to this in a second
+    install_requires=['pystache'          # I get to this in a second
 
-    ],
+                      ],
     classifiers=[
         # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
         'Development Status :: 3 - Alpha',
